@@ -1,0 +1,62 @@
+{
+  "projectType": "frontend",
+  "projectName": "Luis Llatas Portfolio",
+  "projectDescription": "A modern personal portfolio website for a junior web developer showcasing skills, projects, and contact information.",
+  "theme": "palm",
+  "primaryColor": "#0069a8",
+  "lightColor": "#0094a8",
+  "darkColor": "#003ba8",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "introduction",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Structure",
+        "pages": [
+          "structure/html-layout",
+          "structure/navigation",
+          "structure/sections"
+        ]
+      },
+      {
+        "group": "Styling",
+        "pages": [
+          "styling/css-architecture",
+          "styling/grid-layout",
+          "styling/animations",
+          "styling/responsive-design"
+        ]
+      },
+      {
+        "group": "Customization",
+        "pages": [
+          "customization/colors",
+          "customization/content",
+          "customization/images"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Responsive Grid Layout",
+    "Fixed Navigation Header",
+    "Skills Showcase with Animated Icons",
+    "Gradient Background Design",
+    "Accessibility-focused Navigation",
+    "Mobile-friendly Responsive Design"
+  ],
+  "publicApiSurface": [
+    "index.html - Main portfolio page",
+    "css/styles.css - Core styling and animations",
+    "Grid Layout System - CSS Grid-based page structure",
+    "Navigation Menu - Fixed header with smooth scrolling",
+    "Skills Section - Animated technology icons display",
+    "Projects Section - Portfolio showcase area",
+    "Contact Section - User contact information"
+  ]
+}
