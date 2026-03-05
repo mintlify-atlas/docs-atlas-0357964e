@@ -1,0 +1,230 @@
+---
+title: "CSS Architecture"
+description: "Understanding the CSS organization and modular structure"
+---
+
+## Overview
+
+The portfolio uses a clean, modular CSS architecture organized into logical sections. The stylesheet (`css/styles.css`) follows a top-down structure that's easy to navigate and maintain.
+
+## File Structure
+
+The CSS is organized into these main sections:
+
+1. **Reset** - Normalizing styles
+2. **Grid Layout** - Page structure
+3. **Menu** - Navigation styling
+4. **Main** - Hero section
+5. **Sections** - Individual content areas (Habilidades, Proyectos, etc.)
+6. **Media Queries** - Responsive adjustments
+
+<Info>
+The entire stylesheet is **300 lines** of vanilla CSS with no preprocessors or frameworks.
+</Info>
+
+## Reset Section
+
+The stylesheet begins with a universal box-sizing reset for consistent sizing:
+
+```css styles.css:3-11
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+```
+
+This ensures padding and borders are included in element dimensions, preventing layout issues.
+
+## Body Styling
+
+The body class creates the signature gradient background:
+
+```css styles.css:14-19
+.body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(#000000, #0069a8, #101828);
+    color: white;
+}
+```
+
+<Tip>
+The gradient flows from pure black at the top, through the primary blue `#0069a8`, to a dark blue-gray at the bottom.
+</Tip>
+
+## Color Palette
+
+The portfolio uses a consistent color scheme throughout:
+
+| Color | Hex Value | Usage |
+|-------|-----------|-------|
+| Pure Black | `#000000` | Gradient start |
+| Primary Blue | `#0069a8` | Gradient middle, main accent |
+| Dark Blue-Gray | `#101828` | Gradient end |
+| Darker Blue | `#003ba8` | Hover effects, focus states |
+| Light Blue | `#0094a8` | Drop shadows, accents |
+| Almost Black | `#0f1011` | Header background |
+| White | `white` / `#ffffff` | Text, links |
+
+## Modular Organization
+
+Each major component is clearly separated with comments:
+
+<Tabs>
+  <Tab title="Grid Layout">
+    ```css styles.css:21-57
+    /* Inicio del Grid Layout */
+    .layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas:
+            "header header"
+            "main main"
+            "Habilidades Habilidades"
+            "proyectos proyectos"
+            "contacto contacto"
+            "footer footer";
+    }
+    /* ... grid area assignments ... */
+    /* Fin del Grid Layout */
+    ```
+  </Tab>
+  
+  <Tab title="Menu Section">
+    ```css styles.css:60-114
+    /* Menu */
+    .header {
+        background-color: #0f1011;
+        padding: 0 5rem;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+    }
+    /* ... navigation styles ... */
+    ```
+  </Tab>
+  
+  <Tab title="Main Section">
+    ```css styles.css:116-142
+    /* Main */
+    #main {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: 1fr;
+        margin-top: 80px;
+    }
+    /* ... hero section styles ... */
+    ```
+  </Tab>
+</Tabs>
+
+## Design Patterns
+
+### 1. Flexbox for Components
+
+Flexbox is used for smaller UI components:
+
+```css styles.css:69-80
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    list-style: none;
+    align-items: center;
+}
+```
+
+### 2. CSS Grid for Layout
+
+CSS Grid handles the overall page structure:
+
+```css styles.css:22-24
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* ... */
+}
+```
+
+### 3. Transitions and Animations
+
+Smooth animations enhance user experience:
+
+```css styles.css:195
+transition: 0.3s ease-out;
+```
+
+```css styles.css:201
+animation: fadeSlide 0.8s both;
+```
+
+<Warning>
+All animations use `animation-fill-mode: both` to maintain end state and prevent flashing.
+</Warning>
+
+## Class Naming Convention
+
+The CSS uses semantic class names:
+
+- `.body` - Main body container
+- `.layout` - Grid layout wrapper
+- `.header` - Navigation header
+- `.nav` - Navigation container
+- `.menu` - Navigation list
+- `.nav-link` - Individual nav items
+- `.section` - Content section wrapper
+- `.group` - Icon group container
+- `.img` - Skill icons
+- `.mi-foto` - Profile photo
+
+<Info>
+No BEM or complex naming methodology is used - names are straightforward and descriptive.
+</Info>
+
+## Browser Compatibility
+
+The CSS uses modern features that work in all current browsers:
+
+- **CSS Grid** - Supported in all modern browsers (IE11+)
+- **Flexbox** - Universal support
+- **CSS Animations** - Full support
+- **CSS Variables** - Not used (could be added for easier theming)
+
+<Tip>
+Consider adding CSS custom properties (variables) for colors to make theme customization easier:
+
+```css
+:root {
+  --color-primary: #0069a8;
+  --color-dark: #003ba8;
+  --color-light: #0094a8;
+}
+```
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Grid Layout" icon="table-cells" href="/styling/grid-layout">
+    Deep dive into the CSS Grid system
+  </Card>
+  <Card title="Animations" icon="wand-magic-sparkles" href="/styling/animations">
+    Learn about keyframes and transitions
+  </Card>
+  <Card title="Responsive Design" icon="mobile-screen" href="/styling/responsive-design">
+    Explore media queries and mobile layouts
+  </Card>
+  <Card title="Color Customization" icon="droplet" href="/customization/colors">
+    Customize the color scheme
+  </Card>
+</CardGroup>

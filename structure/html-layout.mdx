@@ -1,0 +1,162 @@
+---
+title: 'HTML Layout Structure'
+description: 'Understanding the semantic HTML5 and CSS Grid layout foundation'
+---
+
+## Overview
+
+The portfolio uses a **CSS Grid-based layout** system with semantic HTML5 elements. The entire page structure is wrapped in a `.layout` container that defines grid areas for each major section.
+
+## The Layout Container
+
+The main grid container is defined in **index.html:12**:
+
+```html
+<div class="layout">
+    <!-- All page content goes here -->
+</div>
+```
+
+### Grid Configuration
+
+The CSS Grid is configured in **styles.css:22-32** with a two-column structure:
+
+<CodeGroup>
+
+```css styles.css
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "header header"
+        "main main"
+        "Habilidades Habilidades"
+        "proyectos proyectos"
+        "contacto contacto"
+        "footer footer";
+}
+```
+
+```html Grid Areas Mapping
+<!-- Each section is assigned to a grid area -->
+<div class="layout">
+    <header class="header">        <!-- grid-area: header -->
+    <main id="main">              <!-- grid-area: main -->
+    <section id="Habilidades">    <!-- grid-area: Habilidades -->
+    <section id="proyectos">      <!-- grid-area: proyectos -->
+    <section id="contacto">       <!-- grid-area: contacto -->
+    <footer id="footer">          <!-- grid-area: footer -->
+</div>
+```
+
+</CodeGroup>
+
+<Info>
+The `grid-template-columns: 2fr 1fr` creates a two-column layout, but notice that all grid areas span both columns (e.g., `"header header"`). This creates a single-column responsive layout by default.
+</Info>
+
+## Semantic HTML5 Elements
+
+The portfolio uses proper semantic HTML5 elements from **index.html**:
+
+<Tabs>
+  <Tab title="Structure">
+    ```html
+    <body class="body">
+        <div class="layout">
+            <header class="header">      <!-- Navigation -->
+            <main id="main">             <!-- Primary content -->
+            <section id="Habilidades">   <!-- Skills section -->
+            <section id="proyectos">     <!-- Projects section -->
+            <section id="contacto">      <!-- Contact section -->
+            <footer id="footer">         <!-- Footer -->
+        </div>
+    </body>
+    ```
+  </Tab>
+  <Tab title="Grid Assignment">
+    ```css
+    .header { grid-area: header; }
+    #main { grid-area: main; }
+    #Habilidades { grid-area: Habilidades; }
+    #proyectos { grid-area: proyectos; }
+    #contacto { grid-area: contacto; }
+    #footer { grid-area: footer; }
+    ```
+  </Tab>
+</Tabs>
+
+### Element Breakdown
+
+| Element | Purpose | Grid Area | Line Reference |
+|---------|---------|-----------|----------------|
+| `<header>` | Fixed navigation bar | `header` | index.html:13-23 |
+| `<main>` | Hero section with intro | `main` | index.html:26-34 |
+| `<section>` (Skills) | Technology skills display | `Habilidades` | index.html:36-47 |
+| `<section>` (Projects) | Projects showcase | `proyectos` | index.html:49-52 |
+| `<section>` (Contact) | Contact information | `contacto` | index.html:54-56 |
+| `<footer>` | Footer content | `footer` | index.html:59-61 |
+
+## Two-Column Pattern
+
+While the grid defines `2fr 1fr` columns, most sections span both columns for a full-width layout. The **main section** uniquely uses this two-column pattern:
+
+```css styles.css:117-122
+#main {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr;
+    margin-top: 80px;
+}
+```
+
+This creates a **3:2 ratio** between the text content and the profile image aside.
+
+<Tip>
+The `margin-top: 80px` on `#main` accounts for the fixed header height, ensuring content isn't hidden behind the navigation.
+</Tip>
+
+## Document Structure
+
+Here's the complete HTML structure from **index.html:1-66**:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis Llatas | Portafolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="body">
+    <div class="layout">
+        <!-- Content sections -->
+    </div>
+</body>
+</html>
+```
+
+### Key Features
+
+- **Language**: Set to Spanish (`lang="es"`)
+- **Viewport**: Mobile-responsive meta tag
+- **Single CSS file**: `css/styles.css`
+- **Grid wrapper**: `.layout` class contains all content
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Navigation" icon="bars" href="/structure/navigation">
+    Learn about the fixed header and navigation system
+  </Card>
+  <Card title="Content Sections" icon="layer-group" href="/structure/sections">
+    Explore the main content sections and their structure
+  </Card>
+  <Card title="CSS Grid Layout" icon="border-all" href="/styling/grid-layout">
+    Deep dive into the CSS Grid implementation
+  </Card>
+  <Card title="Customize Content" icon="pen-to-square" href="/customization/content">
+    Learn how to modify the HTML structure
+  </Card>
+</CardGroup>

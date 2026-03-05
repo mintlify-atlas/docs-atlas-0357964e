@@ -1,0 +1,347 @@
+---
+title: 'Content Sections'
+description: 'Main content areas including hero, skills, projects, and contact sections'
+---
+
+## Overview
+
+The portfolio is organized into four main content sections, each with a unique purpose and structure. These sections are wrapped in semantic HTML5 elements and positioned using CSS Grid.
+
+## Main Section (Hero)
+
+The hero section introduces the developer with a **two-column grid layout** from **index.html:26-34**:
+
+```html
+<main id="main">
+    <section class="section">
+        <h2>Desarrollador Full Stack</h2>
+        <p>Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.</p>
+    </section>
+    <aside class="aside">
+        <img src="/img/mi-foto.png" alt="Foto de perfil de Luis Eduardo" class="mi-foto">
+    </aside>
+</main>
+```
+
+### Grid Layout
+
+The main section uses a **3:2 column ratio** defined in **styles.css:117-122**:
+
+<Tabs>
+  <Tab title="CSS Grid">
+    ```css
+    #main {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: 1fr;
+        margin-top: 80px;
+    }
+    ```
+    
+    - **3fr** - Left column for text content (`.section`)
+    - **2fr** - Right column for profile image (`.aside`)
+    - **margin-top: 80px** - Offset for fixed header
+  </Tab>
+  
+  <Tab title="Section Styling">
+    ```css
+    .section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: auto;
+        margin: 0 25px;
+        text-align: center;
+    }
+    ```
+    
+    Centers the text content vertically and horizontally using flexbox.
+  </Tab>
+  
+  <Tab title="Profile Image">
+    ```css
+    .mi-foto {
+        width: 350px;
+        display: block;
+        margin: 0 auto;
+        margin: 2rem;
+        filter: drop-shadow(1px 1px 30px #0094a8);
+    }
+    ```
+    
+    - Fixed width of 350px
+    - Centered with `margin: 0 auto`
+    - Glowing blue drop shadow effect
+  </Tab>
+</Tabs>
+
+<Info>
+The `<aside>` element is semantically correct for the profile image, as it represents content that is tangentially related to the main content.
+</Info>
+
+### Mobile Responsiveness
+
+On screens **below 780px** (**styles.css:144-169**), the layout switches to single column:
+
+```css
+@media (max-width: 780px) {
+    #main {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    
+    .mi-foto {
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+    }
+}
+```
+
+## Habilidades Section (Skills)
+
+The skills section displays technology icons with animations from **index.html:36-47**:
+
+```html
+<section id="Habilidades">
+    <h2>Habilidades</h2>
+    <div class="group">
+        <img src="/svg/html-5-svgrepo-com.svg" alt="html imagen" class="img">
+        <img src="/svg/css-3-svgrepo-com.svg" alt="css imagen" class="img">
+        <img src="/svg/javascript-svgrepo-com.svg" alt="javascript imagen" class="img">
+        <img src="/svg/tailwind-svgrepo-com.svg" alt="tailwind imagen" class="img">
+        <img src="/svg/microsoft-sql-server-logo-svgrepo-com.svg" alt="sqlserver imagen" class="img">
+        <img src="/svg/mongodb-svgrepo-com.svg" alt="mongodb imagen" class="img">
+        <img src="/svg/mysql-logo-svgrepo-com.svg" alt="mysql imagen" class="img">
+    </div>
+</section>
+```
+
+### Technology Stack Displayed
+
+| Icon | Technology | File |
+|------|------------|------|
+| 🌐 | HTML5 | `html-5-svgrepo-com.svg` |
+| 🎨 | CSS3 | `css-3-svgrepo-com.svg` |
+| ⚡ | JavaScript | `javascript-svgrepo-com.svg` |
+| 🎐 | Tailwind CSS | `tailwind-svgrepo-com.svg` |
+| 🗄️ | SQL Server | `microsoft-sql-server-logo-svgrepo-com.svg` |
+| 🍃 | MongoDB | `mongodb-svgrepo-com.svg` |
+| 🐬 | MySQL | `mysql-logo-svgrepo-com.svg` |
+
+### Icon Container
+
+The `.group` class creates a **flexible, centered layout** from **styles.css:182-189**:
+
+```css
+.group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin: 0 10px 0 10px;
+}
+```
+
+- **flex-wrap: wrap** - Icons wrap to multiple rows on small screens
+- **gap: 1.2rem** - Consistent spacing between icons
+- **justify-content: center** - Centers the icon grid
+
+### Icon Animations
+
+Each icon has **fade-in and hover effects** from **styles.css:192-211**:
+
+<CodeGroup>
+
+```css Base Styling
+.img {
+    width: 50px;
+    height: 50px;
+    transition: 0.3s ease-out;
+    box-sizing: content-box;
+    animation: fadeSlide 0.8s both;
+    scale: 1;
+}
+```
+
+```css Hover Effect
+.img:hover {
+    scale: 1.15;
+    filter: brightness(1.5) contrast(1.1);
+}
+```
+
+```css Fade-In Animation
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+```
+
+</CodeGroup>
+
+### Staggered Animation Delays
+
+Each icon animates in sequence (**styles.css:225-251**):
+
+```css
+.img:nth-child(1) { animation-delay: 0.2s; }
+.img:nth-child(2) { animation-delay: 0.3s; }
+.img:nth-child(3) { animation-delay: 0.4s; }
+.img:nth-child(4) { animation-delay: 0.5s; }
+.img:nth-child(5) { animation-delay: 0.4s; }
+.img:nth-child(6) { animation-delay: 0.3s; }
+.img:nth-child(7) { animation-delay: 0.2s; }
+```
+
+<Tip>
+The delays create a **wave effect** - icons fade in from both sides toward the center, then reverse back out.
+</Tip>
+
+## Proyectos Section (Projects)
+
+The projects section is a **placeholder for future content** from **index.html:49-52**:
+
+```html
+<section id="proyectos">
+    <h2>Mis Proyectos</h2>
+    <div></div>
+</section>
+```
+
+### Current State
+
+- **Empty `<div>`** - Ready for project cards or gallery
+- **Centered heading** - Styled in **styles.css:286-288**
+- **Minimal CSS** - Only text-align defined
+
+<Info>
+This section is intentionally empty, allowing developers to customize it with their own project showcases, galleries, or card grids.
+</Info>
+
+## Contacto Section (Contact)
+
+The contact section is also a **placeholder** from **index.html:54-56**:
+
+```html
+<section id="contacto">
+    <h2>Contacto</h2>
+</section>
+```
+
+### Styling
+
+Minimal styling from **styles.css:292-294**:
+
+```css
+#contacto {
+    text-align: center;
+}
+```
+
+<Tip>
+Consider adding:
+- Contact form
+- Email and social media links
+- Location information
+- Professional profiles (LinkedIn, GitHub)
+</Tip>
+
+## Footer Section
+
+The footer is defined in **index.html:59-61**:
+
+```html
+<footer id="footer">
+    <h2>Footer</h2>
+</footer>
+```
+
+### Styling
+
+Simple centered text from **styles.css:298-300**:
+
+```css
+#footer {
+    text-align: center;
+}
+```
+
+## Section Summary
+
+| Section | ID | Purpose | Status | Lines |
+|---------|-------|---------|--------|-------|
+| **Main** | `#main` | Hero intro with profile | ✅ Complete | index.html:26-34 |
+| **Habilidades** | `#Habilidades` | Technology skills display | ✅ Complete | index.html:36-47 |
+| **Proyectos** | `#proyectos` | Project showcase | 🚧 Placeholder | index.html:49-52 |
+| **Contacto** | `#contacto` | Contact information | 🚧 Placeholder | index.html:54-56 |
+| **Footer** | `#footer` | Footer content | 🚧 Placeholder | index.html:59-61 |
+
+## Complete Structure Example
+
+Here's the full section hierarchy:
+
+```html
+<div class="layout">
+    <!-- Navigation -->
+    <header class="header">...</header>
+    
+    <!-- Hero: Complete -->
+    <main id="main">
+        <section class="section">...</section>
+        <aside class="aside">...</aside>
+    </main>
+    
+    <!-- Skills: Complete -->
+    <section id="Habilidades">
+        <h2>Habilidades</h2>
+        <div class="group">
+            <img class="img" />  <!-- 7 technology icons -->
+        </div>
+    </section>
+    
+    <!-- Projects: Placeholder -->
+    <section id="proyectos">
+        <h2>Mis Proyectos</h2>
+        <div></div>  <!-- Empty - ready for customization -->
+    </section>
+    
+    <!-- Contact: Placeholder -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <!-- Empty - ready for contact form/info -->
+    </section>
+    
+    <!-- Footer: Placeholder -->
+    <footer id="footer">
+        <h2>Footer</h2>
+    </footer>
+</div>
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="HTML Layout" icon="table-cells" href="/structure/html-layout">
+    Understand the overall grid structure
+  </Card>
+  <Card title="Navigation" icon="bars" href="/structure/navigation">
+    Learn about the fixed navigation header
+  </Card>
+  <Card title="CSS Grid System" icon="border-all" href="/styling/grid-layout">
+    Explore the grid layout powering these sections
+  </Card>
+  <Card title="Customize Content" icon="pen-to-square" href="/customization/content">
+    Learn how to add your own content to sections
+  </Card>
+</CardGroup>

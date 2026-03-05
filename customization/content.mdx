@@ -1,0 +1,354 @@
+---
+title: Content Customization
+description: Update text, headings, and information throughout your portfolio
+---
+
+This guide shows you how to customize all the text content in your portfolio, from the main heading to navigation menu items.
+
+## Main Section Content
+
+The hero section is the first thing visitors see. It contains your title and description.
+
+<Steps>
+  <Step title="Update your professional title">
+    Open `index.html` and find line 28:
+
+    ```html
+    <h2>Desarrollador Full Stack</h2>
+    ```
+
+    Change this to your own title:
+
+    ```html
+    <h2>Senior Frontend Developer</h2>
+    <!-- or -->
+    <h2>Creative Web Designer</h2>
+    <!-- or -->
+    <h2>Full Stack Engineer & UI/UX Specialist</h2>
+    ```
+  </Step>
+
+  <Step title="Update your description">
+    On line 29, update the description text:
+
+    ```html
+    <p>Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.</p>
+    ```
+
+    Replace with your own introduction:
+
+    ```html
+    <p>I build modern, responsive web applications with a focus on user experience and performance.</p>
+    ```
+
+    Keep it concise - 1-2 sentences works best for the hero section.
+  </Step>
+</Steps>
+
+<Tip>
+  Your professional title and description are crucial for SEO and first impressions. Make them clear, specific, and memorable.
+</Tip>
+
+## Navigation Menu
+
+The navigation menu appears at the top of the page (`index.html:17-20`).
+
+<Steps>
+  <Step title="Customize menu items">
+    Find the navigation list in `index.html`:
+
+    ```html
+    <ul class="menu">
+        <li class="nav-link"><a href="#main">Quien Soy</a></li>
+        <li class="nav-link"><a href="#Habilidades">Habilidades</a></li>
+        <li class="nav-link"><a href="#proyectos">Proyectos</a></li>
+        <li class="nav-link"><a href="#contacto">Contáctame</a></li>
+    </ul>
+    ```
+  </Step>
+
+  <Step title="Change menu text">
+    Update the link text to English or your preferred language:
+
+    ```html
+    <ul class="menu">
+        <li class="nav-link"><a href="#main">About</a></li>
+        <li class="nav-link"><a href="#Habilidades">Skills</a></li>
+        <li class="nav-link"><a href="#proyectos">Projects</a></li>
+        <li class="nav-link"><a href="#contacto">Contact</a></li>
+    </ul>
+    ```
+  </Step>
+
+  <Step title="Add or remove menu items">
+    To add a new menu item, insert a new list item:
+
+    ```html
+    <li class="nav-link"><a href="#blog">Blog</a></li>
+    ```
+
+    Make sure the `href` matches the `id` of the corresponding section.
+  </Step>
+</Steps>
+
+<Warning>
+  If you change the navigation links, make sure to update the corresponding section IDs in the HTML. The `href="#proyectos"` must match `id="proyectos"` for smooth scrolling to work.
+</Warning>
+
+## Section Headings
+
+Each section has a heading that you can customize.
+
+### Skills Section
+
+Find line 37 in `index.html`:
+
+```html
+<h2>Habilidades</h2>
+```
+
+Change to:
+
+```html
+<h2>Technical Skills</h2>
+<!-- or -->
+<h2>What I Work With</h2>
+```
+
+### Projects Section
+
+Find line 50:
+
+```html
+<h2>Mis Proyectos</h2>
+```
+
+Change to:
+
+```html
+<h2>Featured Projects</h2>
+<!-- or -->
+<h2>My Work</h2>
+```
+
+### Contact Section
+
+Find line 55:
+
+```html
+<h2>Contacto</h2>
+```
+
+Change to:
+
+```html
+<h2>Get In Touch</h2>
+<!-- or -->
+<h2>Contact Me</h2>
+```
+
+## Adding Projects
+
+The projects section is currently empty (lines 50-52). Here's how to add your projects:
+
+<Steps>
+  <Step title="Locate the projects section">
+    Find this section in `index.html`:
+
+    ```html
+    <section id="proyectos">
+        <h2>Mis Proyectos</h2>
+        <div></div>
+    </section>
+    ```
+  </Step>
+
+  <Step title="Add project cards">
+    Replace the empty `<div></div>` with project content:
+
+    ```html
+    <section id="proyectos">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>E-Commerce Platform</h3>
+                <p>A full-stack shopping application built with React and Node.js</p>
+                <a href="https://github.com/yourusername/project">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Task Management App</h3>
+                <p>Collaborative task manager with real-time updates using WebSockets</p>
+                <a href="https://github.com/yourusername/project2">View Project</a>
+            </div>
+        </div>
+    </section>
+    ```
+  </Step>
+
+  <Step title="Style the project cards (optional)">
+    Add CSS to `styles.css` to style your project cards:
+
+    ```css
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .project-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .project-card h3 {
+        color: #0094a8;
+        margin-top: 0;
+    }
+
+    .project-card a {
+        color: #003ba8;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    ```
+  </Step>
+</Steps>
+
+## Adding Contact Information
+
+The contact section is also empty (lines 54-56). Here's how to add contact details:
+
+<Steps>
+  <Step title="Add contact methods">
+    Find the contact section in `index.html`:
+
+    ```html
+    <section id="contacto">
+        <h2>Contacto</h2>
+    </section>
+    ```
+  </Step>
+
+  <Step title="Insert contact information">
+    Add your contact details:
+
+    ```html
+    <section id="contacto">
+        <h2>Get In Touch</h2>
+        <div class="contact-info">
+            <p>I'd love to hear from you! Reach out via:</p>
+            <ul class="contact-list">
+                <li>Email: <a href="mailto:luis@example.com">luis@example.com</a></li>
+                <li>LinkedIn: <a href="https://linkedin.com/in/yourusername">linkedin.com/in/yourusername</a></li>
+                <li>GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></li>
+                <li>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></li>
+            </ul>
+        </div>
+    </section>
+    ```
+  </Step>
+
+  <Step title="Style the contact section">
+    Add styling to `styles.css`:
+
+    ```css
+    .contact-info {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .contact-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .contact-list li {
+        margin: 1rem 0;
+        font-size: 1.1rem;
+    }
+
+    .contact-list a {
+        color: #0094a8;
+        text-decoration: none;
+    }
+
+    .contact-list a:hover {
+        text-decoration: underline;
+    }
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  Consider adding a contact form using a service like [Formspree](https://formspree.io/) or [Netlify Forms](https://www.netlify.com/products/forms/) instead of just listing contact information.
+</Tip>
+
+## Updating the Page Title
+
+The browser tab title is set on line 7 of `index.html`:
+
+```html
+<title>Luis Llatas | Portafolio</title>
+```
+
+Change it to your name:
+
+```html
+<title>Your Name | Portfolio</title>
+<!-- or -->
+<title>Your Name - Web Developer</title>
+```
+
+## Updating the Logo
+
+The header logo is a placeholder image on line 15:
+
+```html
+<h1><img src="https://placehold.co/140x40/f0f0f0/333?text=Luis+Llatas" alt="Luis Llatas"></h1>
+```
+
+Replace with your own logo or text:
+
+```html
+<!-- Option 1: Your own logo image -->
+<h1><img src="/img/logo.png" alt="Your Name"></h1>
+
+<!-- Option 2: Text logo -->
+<h1>Your Name</h1>
+```
+
+## Best Practices
+
+<Warning>
+  **Accessibility**: Always include descriptive `alt` text for images and ensure links have meaningful text (avoid "click here").
+</Warning>
+
+- Keep headings concise and descriptive
+- Use proper HTML heading hierarchy (h1 → h2 → h3)
+- Write in active voice for stronger impact
+- Proofread all content for spelling and grammar
+- Test all links to ensure they work correctly
+- Keep descriptions short and scannable
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customize Colors" icon="droplet" href="/customization/colors">
+    Personalize the color scheme
+  </Card>
+  <Card title="Customize Images" icon="image" href="/customization/images">
+    Replace photos and icons
+  </Card>
+  <Card title="HTML Structure" icon="code" href="/structure/html-layout">
+    Understand the HTML layout
+  </Card>
+  <Card title="Content Sections" icon="layer-group" href="/structure/sections">
+    Learn about each portfolio section
+  </Card>
+</CardGroup>

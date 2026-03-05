@@ -1,0 +1,257 @@
+---
+title: 'Navigation Header'
+description: 'Fixed navigation bar with smooth scrolling and accessibility features'
+---
+
+## Overview
+
+The portfolio features a **fixed navigation header** that stays at the top of the page while scrolling. It includes a logo and navigation links to all major sections.
+
+## HTML Structure
+
+The navigation is defined in **index.html:13-23**:
+
+```html
+<header class="header">
+    <nav class="nav">
+        <h1><img src="https://placehold.co/140x40/f0f0f0/333?text=Luis+Llatas" alt="Luis Llatas"></h1>
+        <ul class="menu">
+            <li class="nav-link"><a href="#main">Quien Soy</a></li>
+            <li class="nav-link"><a href="#Habilidades">Habilidades</a></li>
+            <li class="nav-link"><a href="#proyectos">Proyectos</a></li>
+            <li class="nav-link"><a href="#contacto">Contáctame</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+### Structure Breakdown
+
+- **`<header class="header">`**: Container with fixed positioning
+- **`<nav class="nav">`**: Flexbox container for logo and menu
+- **`<h1>`**: Contains logo image (currently a placeholder)
+- **`<ul class="menu">`**: Unordered list of navigation items
+- **`<li class="nav-link">`**: Each menu item
+- **`<a href="#...">`**: Anchor links for smooth scrolling
+
+## CSS Styling
+
+<Tabs>
+  <Tab title="Fixed Positioning">
+    The header is fixed to the top of the viewport in **styles.css:61-67**:
+    
+    ```css
+    .header {
+        background-color: #0f1011;
+        padding: 0 5rem;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+    }
+    ```
+    
+    **Key Properties**:
+    - `position: fixed` - Stays at top while scrolling
+    - `width: 100%` - Spans entire viewport width
+    - `z-index: 99` - Ensures header appears above other content
+    - `padding: 0 5rem` - Horizontal spacing
+  </Tab>
+  
+  <Tab title="Flexbox Layout">
+    The nav uses flexbox for horizontal alignment in **styles.css:69-72**:
+    
+    ```css
+    .nav {
+        display: flex;
+        justify-content: space-between;
+    }
+    ```
+    
+    This creates a **space-between** layout with the logo on the left and menu on the right.
+  </Tab>
+  
+  <Tab title="Menu Styling">
+    The menu items are also flexbox in **styles.css:74-80**:
+    
+    ```css
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        gap: 3rem;
+        list-style: none;
+        align-items: center;
+    }
+    ```
+    
+    - `gap: 3rem` - Spacing between menu items
+    - `list-style: none` - Removes bullet points
+    - `align-items: center` - Vertically centers items
+  </Tab>
+</Tabs>
+
+## Z-Index and Layering
+
+<Info>
+The `z-index: 99` ensures the header remains visible above all other content. This is critical for fixed navigation to avoid being hidden behind sections.
+</Info>
+
+```css styles.css:66
+z-index: 99;
+```
+
+The main content section compensates with **styles.css:121**:
+
+```css
+#main {
+    margin-top: 80px;  /* Prevents content from hiding under fixed header */
+}
+```
+
+## Smooth Scrolling
+
+The navigation uses **anchor links** that smoothly scroll to sections:
+
+```html
+<a href="#main">Quien Soy</a>
+<a href="#Habilidades">Habilidades</a>
+<a href="#proyectos">Proyectos</a>
+<a href="#contacto">Contáctame</a>
+```
+
+Each `href` targets an `id` on the page:
+- `#main` → `<main id="main">` (index.html:26)
+- `#Habilidades` → `<section id="Habilidades">` (index.html:36)
+- `#proyectos` → `<section id="proyectos">` (index.html:49)
+- `#contacto` → `<section id="contacto">` (index.html:54)
+
+## Interactive Effects
+
+### Link Styling
+
+Basic link styling from **styles.css:82-85**:
+
+```css
+.nav-link a {
+    text-decoration: none;
+    color: white;
+}
+```
+
+### Hover Animation
+
+An animated underline appears on hover (**styles.css:96-104**):
+
+```css
+.nav-link:hover::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #003ba8;
+    display: block;
+    animation-name: ampliar-anchura;
+    animation-duration: 0.5s;
+}
+
+@keyframes ampliar-anchura {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+```
+
+<Tip>
+The animation uses a CSS `::after` pseudo-element that grows from 0% to 100% width, creating a smooth underline effect.
+</Tip>
+
+## Accessibility Features
+
+The navigation includes keyboard accessibility with **focus styles** from **styles.css:88-93**:
+
+```css
+.nav-link a:focus {
+    outline: 4px solid #003ba8;
+    border-radius: 8px;
+    outline-offset: 3px;
+    transition-delay: 125ms;
+}
+```
+
+### Focus Features:
+- **4px blue outline** - Visible focus indicator
+- **8px border radius** - Rounded corners for aesthetic
+- **3px offset** - Space between outline and text
+- **125ms delay** - Smooth transition timing
+
+<Info>
+Users can navigate the menu using the **Tab** key, and each link displays a clear focus indicator for accessibility compliance.
+</Info>
+
+## Mobile Responsiveness
+
+On smaller screens (**styles.css:166-168**), the padding is removed:
+
+```css
+@media (max-width: 780px) {
+    .header {
+        padding: 0;
+    }
+}
+```
+
+This prevents horizontal overflow on mobile devices.
+
+## Visual Example
+
+Here's how the navigation structure works together:
+
+<CodeGroup>
+
+```html Complete Structure
+<header class="header">              <!-- Fixed container -->
+    <nav class="nav">                   <!-- Flexbox: logo | menu -->
+        <h1><img src="..." /></h1>      <!-- Left: Logo -->
+        <ul class="menu">               <!-- Right: Menu items -->
+            <li class="nav-link">       <!-- Flex items with gap -->
+                <a href="#main">...</a> <!-- Smooth scroll links -->
+            </li>
+        </ul>
+    </nav>
+</header>
+```
+
+```css Complete Styling
+.header {
+    position: fixed;        /* Stick to top */
+    width: 100%;           /* Full width */
+    z-index: 99;           /* Above content */
+}
+
+.nav {
+    display: flex;         /* Horizontal layout */
+    justify-content: space-between;  /* Logo left, menu right */
+}
+
+.menu {
+    display: flex;         /* Horizontal items */
+    gap: 3rem;            /* Spacing */
+    list-style: none;     /* No bullets */
+}
+```
+
+</CodeGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="HTML Layout" icon="table-cells" href="/structure/html-layout">
+    Learn about the overall grid layout structure
+  </Card>
+  <Card title="Content Sections" icon="layer-group" href="/structure/sections">
+    Explore the main content sections
+  </Card>
+  <Card title="CSS Animations" icon="wand-magic-sparkles" href="/styling/animations">
+    Discover navigation hover animations
+  </Card>
+  <Card title="Responsive Design" icon="mobile-screen" href="/styling/responsive-design">
+    See how navigation adapts to mobile
+  </Card>
+</CardGroup>

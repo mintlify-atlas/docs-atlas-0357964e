@@ -1,0 +1,492 @@
+---
+title: "Responsive Design"
+description: "How the portfolio adapts seamlessly across all device sizes"
+---
+
+## Overview
+
+The Luis Llatas Portfolio uses CSS media queries to create a mobile-friendly, responsive layout. The design adapts at key breakpoints to ensure optimal viewing on phones, tablets, and desktops.
+
+<Info>
+The portfolio uses a **mobile-first** approach with targeted breakpoints for larger screens.
+</Info>
+
+## Breakpoints
+
+Two main breakpoints control the responsive behavior:
+
+| Breakpoint | Target Devices | Changes |
+|------------|----------------|--------|
+| **≤780px** | Phones, small tablets | Hero grid → single column, reduced padding |
+| **≤800px** | Phones in portrait | Animation timing adjustments |
+
+<Tip>
+Most significant layout changes happen at **780px**, which targets most phone screens in portrait orientation.
+</Tip>
+
+## Hero Section Responsive Layout
+
+The most dramatic responsive change affects the `#main` hero section.
+
+### Desktop Layout (>780px)
+
+```css styles.css:117-122
+#main {
+    display: grid;
+    grid-template-columns: 3fr 2fr;  /* Two columns: 60% + 40% */
+    grid-template-rows: 1fr;
+    margin-top: 80px;
+}
+```
+
+<Tabs>
+  <Tab title="Desktop View">
+    ```
+    ┌─────────────────────────────────────┐
+    │        Fixed Navigation             │
+    ├──────────────────┬──────────────────┤
+    │                  │                  │
+    │  Desarrollador   │    [Profile]     │
+    │   Full Stack     │    [Photo]       │
+    │                  │                  │
+    │  Description...  │                  │
+    │                  │                  │
+    └──────────────────┴──────────────────┘
+         60% width          40% width
+    ```
+  </Tab>
+  
+  <Tab title="Desktop CSS">
+    ```css
+    #main {
+        grid-template-columns: 3fr 2fr;
+    }
+    
+    .section {
+        margin: 0 25px;
+        text-align: center;
+    }
+    
+    .mi-foto {
+        width: 350px;
+        margin: 2rem;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Mobile Layout (≤780px)
+
+```css styles.css:144-169
+@media (max-width: 780px) {
+    #main {
+        display: grid;
+        grid-template-columns: 1fr;     /* Single column */
+        grid-template-rows: auto;
+    }
+
+    .mi-foto {
+        display: block;
+        margin: 0 auto;
+        width: 60%;                      /* Smaller image */
+    }
+
+    .section {
+        text-align: center;
+        margin: 20px 3rem;               /* Adjusted spacing */
+    }
+
+    .section p {
+        margin-bottom: 30px;
+    }
+
+    .header {
+        padding: 0;                      /* Remove horizontal padding */
+    }
+}
+```
+
+<Tabs>
+  <Tab title="Mobile View">
+    ```
+    ┌─────────────────┐
+    │  Navigation     │
+    ├─────────────────┤
+    │                 │
+    │   [Profile]     │
+    │   [Photo]       │
+    │   (60% width)   │
+    │                 │
+    ├─────────────────┤
+    │                 │
+    │ Desarrollador   │
+    │  Full Stack     │
+    │                 │
+    │ Description...  │
+    │                 │
+    └─────────────────┘
+       Full width
+    ```
+    
+    Image appears **above** text content.
+  </Tab>
+  
+  <Tab title="Key Changes">
+    1. **Grid columns**: `3fr 2fr` → `1fr` (single column)
+    2. **Image size**: `350px` → `60%` (responsive percentage)
+    3. **Section margin**: `0 25px` → `20px 3rem` (more vertical space)
+    4. **Header padding**: `0 5rem` → `0` (full width on mobile)
+    5. **Paragraph spacing**: Added `margin-bottom: 30px` for readability
+  </Tab>
+</Tabs>
+
+<Warning>
+The CSS Grid's source order determines mobile stacking. The `<section>` with text comes before `<aside>` with the image in HTML, but desktop CSS positions the image on the right. On mobile, they stack naturally with text below.
+</Warning>
+
+## Navigation Responsive Behavior
+
+The header adapts its padding for smaller screens:
+
+<CodeGroup>
+
+```css Desktop (>780px)
+.header {
+    background-color: #0f1011;
+    padding: 0 5rem;           /* 80px horizontal padding */
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+}
+```
+
+```css Mobile (≤780px)
+.header {
+    padding: 0;                /* No horizontal padding */
+}
+```
+
+</CodeGroup>
+
+<Info>
+Removing horizontal padding on mobile ensures navigation links have maximum space and don't overflow.
+</Info>
+
+### Navigation Layout
+
+The navigation uses **Flexbox**, which naturally wraps on small screens:
+
+```css styles.css:74-80
+.menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    list-style: none;
+    align-items: center;
+}
+```
+
+No media query needed - the `gap: 3rem` provides spacing, and flexbox handles the rest.
+
+<Tip>
+Consider reducing the gap on mobile for tighter navigation:
+
+```css
+@media (max-width: 780px) {
+    .menu {
+        gap: 1.5rem;  /* Smaller gap on mobile */
+    }
+}
+```
+</Tip>
+
+## Animation Timing Adjustments
+
+Skill icons use different animation delays on mobile:
+
+### Desktop Animation Pattern (>800px)
+
+```css styles.css:225-251
+.img:nth-child(1) { animation-delay: 0.2s; }
+.img:nth-child(2) { animation-delay: 0.3s; }
+.img:nth-child(3) { animation-delay: 0.4s; }
+.img:nth-child(4) { animation-delay: 0.5s; }  /* Peak */
+.img:nth-child(5) { animation-delay: 0.4s; }
+.img:nth-child(6) { animation-delay: 0.3s; }
+.img:nth-child(7) { animation-delay: 0.2s; }
+```
+
+Creates a **center-out wave** when icons are in a single row.
+
+### Mobile Animation Pattern (≤800px)
+
+```css styles.css:253-281
+@media (max-width: 800px) {
+    .img:nth-child(1) { animation-delay: 0.2s; }
+    .img:nth-child(2) { animation-delay: 0.3s; }
+    .img:nth-child(3) { animation-delay: 0.4s; }
+    .img:nth-child(4) { animation-delay: 0.5s; }
+    .img:nth-child(5) { animation-delay: 0.6s; }
+    .img:nth-child(6) { animation-delay: 0.7s; }
+    .img:nth-child(7) { animation-delay: 0.8s; }
+}
+```
+
+Creates a **linear cascade** when icons wrap to multiple rows.
+
+<Tabs>
+  <Tab title="Desktop (Single Row)">
+    ```
+    [HTML] [CSS] [JS] [TW] [SQL] [Mongo] [MySQL]
+      1     2     3    4    3      2       1
+           ⬅ Delays (center-out) ➡
+    ```
+  </Tab>
+  
+  <Tab title="Mobile (Wrapped Rows)">
+    ```
+    [HTML] [CSS] [JS]
+      1     2     3
+      
+    [TW] [SQL] [Mongo]
+     4     5      6
+     
+    [MySQL]
+      7
+    
+    ↓ Linear cascade top to bottom
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+The 20px difference in breakpoints (780px vs 800px) provides a small buffer zone where layout changes before animation timing, preventing awkward transitions.
+</Info>
+
+## Skills Section Responsive Layout
+
+The `.group` container holding skill icons uses Flexbox with wrapping:
+
+```css styles.css:182-189
+.group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;              /* Icons wrap to multiple rows */
+    gap: 1.2rem;
+    margin: 0 10px 0 10px;
+}
+```
+
+**Behavior**:
+- **Desktop**: All 7 icons in one row (if screen is wide enough)
+- **Tablet**: Icons wrap to 2 rows (4 + 3 or 5 + 2)
+- **Mobile**: Icons wrap to multiple rows (3 + 3 + 1 or 2 + 2 + 2 + 1)
+
+<Tip>
+The `flex-wrap: wrap` property makes this section naturally responsive without media queries.
+</Tip>
+
+## Image Responsive Sizing
+
+### Profile Photo
+
+<CodeGroup>
+
+```css Desktop
+.mi-foto {
+    width: 350px;        /* Fixed width */
+    margin: 2rem;
+}
+```
+
+```css Mobile (≤780px)
+.mi-foto {
+    width: 60%;          /* Percentage-based */
+    margin: 0 auto;      /* Centered */
+}
+```
+
+</CodeGroup>
+
+**Why percentages on mobile?**
+- Fixed `350px` would overflow on small screens (less than 375px wide)
+- `60%` scales proportionally to screen size
+- `margin: 0 auto` centers the image horizontally
+
+### Skill Icons
+
+```css styles.css:193-194
+.img {
+    width: 50px;
+    height: 50px;
+}
+```
+
+Icons remain **50×50px** at all screen sizes. They're small enough to fit comfortably on any device.
+
+<Warning>
+If you increase icon size above 60px, consider adding a mobile breakpoint:
+
+```css
+@media (max-width: 480px) {
+    .img {
+        width: 40px;
+        height: 40px;
+    }
+}
+```
+</Warning>
+
+## Testing Responsive Design
+
+### Browser DevTools
+
+1. **Chrome/Edge**: Press `F12` → Click device icon or `Ctrl+Shift+M`
+2. **Firefox**: `F12` → Responsive Design Mode (`Ctrl+Shift+M`)
+3. **Safari**: Develop menu → Enter Responsive Design Mode
+
+### Key Test Sizes
+
+| Device | Width | What to Check |
+|--------|-------|---------------|
+| **iPhone SE** | 375px | Smallest common phone |
+| **iPhone 12/13** | 390px | Modern iPhone standard |
+| **iPad Mini** | 768px | Just below 780px breakpoint |
+| **iPad Air** | 820px | Just above 800px breakpoint |
+| **Desktop** | 1920px | Full desktop experience |
+
+<Accordion title="Common Responsive Issues">
+  - **Text overflow**: Ensure all text fits at 320px width
+  - **Touch targets**: Buttons should be at least 44×44px
+  - **Image loading**: Use responsive images or reduce file size
+  - **Navigation overflow**: Long menu items may wrap awkwardly
+  - **Fixed positioning**: Header should not cover content
+</Accordion>
+
+## Mobile-First Alternative
+
+The current CSS uses **desktop-first** (styles default to desktop, media queries for mobile). Here's how to convert to **mobile-first**:
+
+<Tabs>
+  <Tab title="Current (Desktop-First)">
+    ```css
+    /* Default desktop styles */
+    #main {
+        grid-template-columns: 3fr 2fr;
+    }
+    
+    /* Override for mobile */
+    @media (max-width: 780px) {
+        #main {
+            grid-template-columns: 1fr;
+        }
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Mobile-First Alternative">
+    ```css
+    /* Default mobile styles */
+    #main {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Enhance for desktop */
+    @media (min-width: 781px) {
+        #main {
+            grid-template-columns: 3fr 2fr;
+        }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>
+Mobile-first is generally preferred because:
+1. Mobile users are the majority
+2. Easier to enhance simple layouts than simplify complex ones
+3. Better performance on low-end devices (less CSS to parse initially)
+</Tip>
+
+## Accessibility Considerations
+
+### Touch Targets
+
+Navigation links have adequate touch targets:
+
+```css
+.nav-link a {
+    /* Implicit padding from parent */
+    /* Links are naturally tappable */
+}
+```
+
+<Warning>
+Ensure clickable elements are at least **44×44px** (Apple) or **48×48px** (Google) for comfortable tapping.
+</Warning>
+
+### Zoom and Text Scaling
+
+The layout uses `rem` and `px` units. Consider viewport units for better text scaling:
+
+```css
+/* Better for accessibility */
+.section h2 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+}
+```
+
+### Orientation Changes
+
+The portfolio works in both portrait and landscape orientations. Test by rotating devices.
+
+## Performance on Mobile
+
+### CSS Considerations
+
+- ✅ **No JavaScript** - Faster initial load
+- ✅ **Minimal CSS** - Only 300 lines
+- ✅ **System fonts** - No web font downloads
+- ⚠️ **Gradient background** - Can be GPU-intensive on old phones
+
+### Image Optimization
+
+Profile photo and icons should be optimized:
+
+```bash
+# Optimize profile photo
+convert mi-foto.png -resize 800x800 -quality 85 mi-foto-optimized.png
+
+# Use WebP format
+convert mi-foto.png -quality 80 mi-foto.webp
+```
+
+<Tip>
+Serve different image sizes based on screen width using the `<picture>` element:
+
+```html
+<picture>
+    <source media="(max-width: 480px)" srcset="mi-foto-small.webp">
+    <source media="(max-width: 780px)" srcset="mi-foto-medium.webp">
+    <img src="mi-foto.png" alt="Profile photo">
+</picture>
+```
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Grid Layout" icon="table-cells" href="/styling/grid-layout">
+    Learn how the grid system enables responsive design
+  </Card>
+  <Card title="Animations" icon="wand-magic-sparkles" href="/styling/animations">
+    Explore mobile animation adjustments
+  </Card>
+  <Card title="HTML Structure" icon="code" href="/structure/html-layout">
+    See how HTML source order affects mobile stacking
+  </Card>
+  <Card title="CSS Architecture" icon="palette" href="/styling/css-architecture">
+    Understand the overall CSS organization
+  </Card>
+</CardGroup>

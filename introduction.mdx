@@ -1,0 +1,149 @@
+---
+title: Introduction
+description: Overview of the Luis Llatas Portfolio project - a clean, responsive personal portfolio website
+---
+
+## What is This Portfolio?
+
+This is a personal portfolio website for **Luis Llatas**, a Full Stack Developer. Built with pure HTML5 and CSS3, this project demonstrates fundamental web development skills without relying on frameworks or libraries. It's designed to showcase a developer's skills, projects, and contact information in a professional, visually appealing format.
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Responsive Grid Layout" icon="grid">
+    CSS Grid-based layout that adapts to different screen sizes with mobile-first responsive design
+  </Card>
+  <Card title="Fixed Navigation" icon="bars">
+    Sticky header with smooth scrolling navigation to different portfolio sections
+  </Card>
+  <Card title="Skills Showcase" icon="code">
+    Animated skill icons with hover effects and staggered fade-in animations
+  </Card>
+  <Card title="Gradient Background" icon="palette">
+    Professional dark gradient theme from black through blue tones
+  </Card>
+</CardGroup>
+
+### Accessibility Features
+
+The portfolio includes keyboard navigation support with custom focus states:
+
+```css
+/* Keyboard focus accessibility */
+.nav-link a:focus {
+    outline: 4px solid #003ba8;
+    border-radius: 8px;
+    outline-offset: 3px;
+    transition-delay: 125ms;
+}
+```
+
+## Technology Stack
+
+- **HTML5** - Semantic markup with proper document structure
+- **CSS3** - Modern features including:
+  - CSS Grid for layout management
+  - Flexbox for component alignment
+  - CSS Animations and transitions
+  - Custom properties and gradients
+  - Media queries for responsive design
+
+<Note>
+  This project intentionally avoids JavaScript frameworks and CSS libraries to demonstrate mastery of core web technologies.
+</Note>
+
+## Portfolio Structure
+
+The portfolio is organized into distinct sections:
+
+### 1. Hero Section (`#main`)
+
+Introduces Luis as a Full Stack Developer with a profile photo and brief description.
+
+```html
+<main id="main">
+    <section class="section">
+        <h2>Desarrollador Full Stack</h2>
+        <p>Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.</p>
+    </section>
+    <aside class="aside">
+        <img src="/img/mi-foto.png" alt="Foto de perfil de Luis Eduardo" class="mi-foto">
+    </aside>
+</main>
+```
+
+### 2. Habilidades (Skills)
+
+Displays technology proficiency with animated icons for:
+- HTML5
+- CSS3
+- JavaScript
+- Tailwind CSS
+- SQL Server
+- MongoDB
+- MySQL
+
+### 3. Proyectos (Projects)
+
+Designated area for showcasing web development projects.
+
+### 4. Contacto (Contact)
+
+Contact section for potential clients or employers to reach out.
+
+## Grid Layout Architecture
+
+The portfolio uses a sophisticated grid system defined in `styles.css`:
+
+```css
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "header header"
+        "main main"
+        "Habilidades Habilidades"
+        "proyectos proyectos"
+        "contacto contacto"
+        "footer footer";
+}
+```
+
+This creates a flexible, maintainable structure that's easy to customize.
+
+## Target Audience
+
+This documentation is for:
+- **Junior developers** learning portfolio development
+- **Students** understanding HTML/CSS architecture
+- **Developers** seeking a template for their own portfolio
+- **Educators** teaching web development fundamentals
+
+## Design Philosophy
+
+The portfolio emphasizes:
+- **Simplicity** - Clean code without unnecessary complexity
+- **Performance** - No external dependencies or heavy frameworks
+- **Accessibility** - Keyboard navigation and semantic HTML
+- **Maintainability** - Well-organized CSS with clear naming conventions
+
+<Note>
+  The portfolio is written in Spanish ("es" language attribute) but the code structure and documentation principles apply universally.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Get the portfolio running locally in minutes
+  </Card>
+  <Card title="Customize Content" icon="pen" href="/customization/content">
+    Learn how to personalize text and images
+  </Card>
+  <Card title="Customize Colors" icon="paintbrush" href="/customization/colors">
+    Modify the color scheme and gradient
+  </Card>
+  <Card title="Customize Images" icon="image" href="/customization/images">
+    Replace photos and skill icons
+  </Card>
+</CardGroup>

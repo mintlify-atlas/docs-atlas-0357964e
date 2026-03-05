@@ -1,97 +1,215 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Luis Llatas Portfolio Documentation"
+description: "Complete guide to understanding, customizing, and deploying a modern portfolio website"
+mode: "custom"
 ---
 
-## Setting up
+<div className="relative overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-[#000000] via-[#0069a8] to-[#101828] opacity-90"></div>
+  <div className="relative py-20 px-6 max-w-6xl mx-auto">
+    <div className="text-center">
+      <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+        Luis Llatas Portfolio
+      </h1>
+      <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto mb-10">
+        A modern, responsive personal portfolio website showcasing web development skills with elegant design and smooth animations
+      </p>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <a 
+          href="/quickstart" 
+          className="inline-flex items-center px-8 py-3 text-base font-medium rounded-lg text-white bg-[#0069a8] hover:bg-[#003ba8] transition-colors no-underline"
+        >
+          Get Started
+        </a>
+        <a 
+          href="/introduction" 
+          className="inline-flex items-center px-8 py-3 text-base font-medium rounded-lg text-white border border-white/30 bg-white/10 hover:bg-white/20 transition-colors no-underline"
+        >
+          View Documentation
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-Get your documentation site up and running in minutes.
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">Quick Start</h2>
+  <p className="text-base text-gray-600 dark:text-gray-400 mb-8">Get your portfolio up and running in minutes</p>
+  
+  <Steps>
+    <Step title="Clone the Repository">
+      Download the portfolio template to your local machine.
+      
+      ```bash Clone repository
+      git clone https://github.com/luisllatas-dev/portafolio-programador-web-junior.git
+      cd portafolio-programador-web-junior
+      ```
+    </Step>
+    
+    <Step title="Open in Browser">
+      Simply open the `index.html` file in your web browser to view the portfolio.
+      
+      ```bash Open with live server
+      # Using Python
+      python -m http.server 8000
+      
+      # Using Node.js
+      npx serve
+      ```
+      
+      <Note>
+        No build process required! This is a static HTML/CSS website that works out of the box.
+      </Note>
+    </Step>
+    
+    <Step title="Customize Content">
+      Edit the HTML and CSS files to personalize with your own information, skills, and projects.
+      
+      ```html index.html
+      <h2>Desarrollador Full Stack</h2>
+      <p>Soy un desarrollador web con experiencia...</p>
+      ```
+    </Step>
+  </Steps>
+</div>
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
-  </Card>
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">Explore by Topic</h2>
+  <p className="text-base text-gray-600 dark:text-gray-400 mb-8">Learn about the structure, styling, and customization options</p>
+  
+  <CardGroup cols={2}>
     <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+      title="HTML Layout"
+      icon="code"
+      href="/structure/html-layout"
+    >
+      Understand the semantic HTML structure and grid-based layout system
+    </Card>
+    <Card
+      title="Navigation"
+      icon="bars"
+      href="/structure/navigation"
+    >
+      Learn about the fixed header navigation with smooth scrolling
+    </Card>
+    <Card
+      title="CSS Architecture"
+      icon="palette"
+      href="/styling/css-architecture"
+    >
+      Explore the modular CSS organization and design patterns
+    </Card>
+    <Card
+      title="Grid Layout"
+      icon="table-cells"
+      href="/styling/grid-layout"
+    >
+      Master the CSS Grid system powering the responsive layout
+    </Card>
+    <Card
+      title="Animations"
+      icon="wand-magic-sparkles"
+      href="/styling/animations"
+    >
+      Discover smooth CSS animations and hover effects
+    </Card>
+    <Card
+      title="Responsive Design"
+      icon="mobile-screen"
+      href="/styling/responsive-design"
+    >
+      Learn how the portfolio adapts across devices
+    </Card>
+  </CardGroup>
+</div>
 
-## Create beautiful pages
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">Key Features</h2>
+  <p className="text-base text-gray-600 dark:text-gray-400 mb-8">What makes this portfolio stand out</p>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="p-6 rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27]">
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">🎨</div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Gradient Background</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Beautiful black to blue gradient creates an elegant, modern aesthetic</p>
+        </div>
+      </div>
+    </div>
+    
+    <div className="p-6 rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27]">
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">📱</div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Fully Responsive</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Optimized for all devices with mobile-first responsive breakpoints</p>
+        </div>
+      </div>
+    </div>
+    
+    <div className="p-6 rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27]">
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">✨</div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Smooth Animations</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">CSS keyframe animations bring skills icons and navigation to life</p>
+        </div>
+      </div>
+    </div>
+    
+    <div className="p-6 rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27]">
+      <div className="flex items-start gap-4">
+        <div className="text-2xl">♿</div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Accessible Navigation</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Focus states and semantic HTML ensure keyboard accessibility</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-Everything you need to create world-class documentation.
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">Customization Guide</h2>
+  <p className="text-base text-gray-600 dark:text-gray-400 mb-8">Make this portfolio your own</p>
+  
+  <CardGroup cols={3}>
+    <Card
+      title="Colors"
+      icon="droplet"
+      href="/customization/colors"
+    >
+      Update the gradient and accent colors to match your brand
+    </Card>
+    <Card
+      title="Content"
+      icon="pen-to-square"
+      href="/customization/content"
+    >
+      Replace placeholder text with your personal information
+    </Card>
+    <Card
+      title="Images"
+      icon="image"
+      href="/customization/images"
+    >
+      Add your profile photo and technology skill icons
+    </Card>
+  </CardGroup>
+</div>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<div className="mt-20 mb-16 max-w-5xl mx-auto px-6">
+  <div className="p-10 rounded-2xl border border-gray-200 dark:border-[#27272a] bg-gradient-to-br from-white to-gray-50 dark:from-[#1a1d27] dark:to-[#242838] text-center">
+    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Ready to Build Your Portfolio?</h2>
+    <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+      Start with our quickstart guide and have your portfolio live in minutes
+    </p>
+    <a 
+      href="/quickstart" 
+      className="inline-flex items-center px-8 py-3 text-base font-medium rounded-lg text-white bg-[#0069a8] hover:bg-[#003ba8] transition-colors no-underline"
+    >
+      Get Started Now
+    </a>
+  </div>
+</div>

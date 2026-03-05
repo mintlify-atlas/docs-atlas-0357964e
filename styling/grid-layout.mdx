@@ -1,0 +1,309 @@
+---
+title: "CSS Grid Layout"
+description: "Master the CSS Grid system powering the portfolio structure"
+---
+
+## Overview
+
+The portfolio uses **CSS Grid** as the foundation for its layout system. Two grid implementations work together:
+
+1. **Main Layout Grid** - Controls overall page structure
+2. **Hero Section Grid** - Two-column layout for main content area
+
+<Info>
+CSS Grid provides precise control over both rows and columns, making it ideal for this layout.
+</Info>
+
+## Main Layout Grid
+
+The `.layout` container wraps the entire page and uses named grid areas:
+
+```css styles.css:22-32
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "header header"
+        "main main"
+        "Habilidades Habilidades"
+        "proyectos proyectos"
+        "contacto contacto"
+        "footer footer";
+}
+```
+
+### Grid Structure Breakdown
+
+**Columns**: `2fr 1fr`
+- Column 1: Takes up 2 fractional units (66.67% width)
+- Column 2: Takes up 1 fractional unit (33.33% width)
+
+<Warning>
+While two columns are defined, all grid areas span both columns. This creates a flexible foundation for future multi-column sections.
+</Warning>
+
+**Grid Areas**: Six named sections
+```
+┌─────────────────────┐
+│  header   header    │ ← Navigation bar
+├─────────────────────┤
+│   main     main     │ ← Hero section
+├─────────────────────┤
+│ Habilidades  ...    │ ← Skills showcase
+├─────────────────────┤
+│ proyectos   ...     │ ← Projects section
+├─────────────────────┤
+│ contacto    ...     │ ← Contact section
+├─────────────────────┤
+│  footer    footer   │ ← Footer
+└─────────────────────┘
+```
+
+### Grid Area Assignments
+
+Each section is assigned to its grid area:
+
+```css styles.css:34-56
+.header {
+    grid-area: header;
+}
+
+#main {
+    grid-area: main;
+}
+
+#Habilidades {
+    grid-area: Habilidades;
+}
+
+#proyectos {
+    grid-area: proyectos;
+}
+
+#contacto {
+    grid-area: contacto;
+}
+
+#footer {
+    grid-area: footer;
+}
+```
+
+<Tip>
+Named grid areas make the layout self-documenting. You can see the page structure just by reading the CSS.
+</Tip>
+
+## HTML Structure
+
+The HTML maps directly to the grid:
+
+```html index.html:12-62
+<div class="layout">
+    <header class="header">
+        <!-- Navigation -->
+    </header>
+
+    <main id="main">
+        <!-- Hero content -->
+    </main>
+
+    <section id="Habilidades">
+        <!-- Skills -->
+    </section>
+
+    <section id="proyectos">
+        <!-- Projects -->
+    </section>
+
+    <section id="contacto">
+        <!-- Contact -->
+    </section>
+
+    <footer id="footer">
+        <!-- Footer -->
+    </footer>
+</div>
+```
+
+## Hero Section Grid
+
+The `#main` section uses a nested grid for its two-column layout:
+
+```css styles.css:117-122
+#main {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr;
+    margin-top: 80px;
+}
+```
+
+### Column Distribution
+
+<Tabs>
+  <Tab title="Desktop Layout">
+    ```
+    ┌──────────────────┬─────────────┐
+    │                  │             │
+    │   Text Content   │   Profile   │
+    │   (3fr - 60%)    │   Image     │
+    │                  │  (2fr-40%)  │
+    │                  │             │
+    └──────────────────┴─────────────┘
+    ```
+    
+    The text section gets **60% of the width** (3 out of 5 fractional units)
+    
+    The image section gets **40% of the width** (2 out of 5 fractional units)
+  </Tab>
+  
+  <Tab title="Mobile Layout">
+    ```
+    ┌─────────────────────┐
+    │                     │
+    │   Profile Image     │
+    │                     │
+    ├─────────────────────┤
+    │                     │
+    │   Text Content      │
+    │                     │
+    └─────────────────────┘
+    ```
+    
+    On screens **≤780px**, the grid collapses to single column:
+    
+    ```css styles.css:145-149
+    @media (max-width: 780px) {
+        #main {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Margin Top Spacing
+
+```css styles.css:121
+margin-top: 80px;
+```
+
+<Info>
+This 80px top margin creates space for the fixed header (which has similar height), preventing content from being hidden behind it.
+</Info>
+
+## Grid vs Flexbox
+
+This portfolio strategically uses both layout systems:
+
+| Feature | Grid | Flexbox |
+|---------|------|--------|
+| **Page Structure** | ✅ Main layout container | ❌ |
+| **Hero Section** | ✅ Two-column layout | ❌ |
+| **Navigation** | ❌ | ✅ Horizontal menu |
+| **Skills Icons** | ❌ | ✅ Wrapping icon grid |
+| **Content Sections** | ❌ | ✅ Vertical centering |
+
+<Tip>
+**Rule of thumb**: Use Grid for two-dimensional layouts (rows AND columns), Flexbox for one-dimensional layouts (single row OR column).
+</Tip>
+
+## Advantages of This Grid System
+
+### 1. Semantic and Readable
+```css
+grid-template-areas:
+    "header header"
+    "main main"
+```
+The layout structure is immediately clear.
+
+### 2. Easy Reordering
+You can change the visual order without touching HTML:
+
+```css
+grid-template-areas:
+    "header header"
+    "proyectos proyectos"  /* Projects moved up */
+    "main main"
+    "Habilidades Habilidades"
+```
+
+### 3. Responsive Flexibility
+Grid areas naturally adapt to different screen sizes.
+
+### 4. No Positioning Hacks
+No floats, absolute positioning, or clearfix needed.
+
+## Customization Examples
+
+### Add a Sidebar
+
+Modify the grid to create a sidebar layout:
+
+```css
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "sidebar Habilidades"
+        "sidebar proyectos"
+        "footer footer";
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+```
+
+### Full-Width Hero with Contained Content
+
+```css
+.layout {
+    grid-template-areas:
+        "header header header"
+        "main main main"          /* Full width */
+        ". Habilidades ."           /* Contained */
+        ". proyectos .";
+    grid-template-columns: 1fr 800px 1fr;  /* Max content width */
+}
+```
+
+<Warning>
+When adding new sections, always assign them a `grid-area` property or they'll auto-place outside the defined areas.
+</Warning>
+
+## Browser Support
+
+CSS Grid is supported in all modern browsers:
+
+- ✅ Chrome 57+ (March 2017)
+- ✅ Firefox 52+ (March 2017)
+- ✅ Safari 10.1+ (March 2017)
+- ✅ Edge 16+ (October 2017)
+- ⚠️ IE 11 (partial support with `-ms-` prefix)
+
+<Tip>
+For IE11 support, you'd need to use the older grid syntax with `-ms-grid` and explicit row/column placement. However, IE11 usage is now negligible.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="CSS Architecture" icon="palette" href="/styling/css-architecture">
+    Learn about the overall CSS organization
+  </Card>
+  <Card title="Responsive Design" icon="mobile-screen" href="/styling/responsive-design">
+    Explore how the grid adapts to mobile
+  </Card>
+  <Card title="HTML Layout" icon="code" href="/structure/html-layout">
+    See how HTML implements the grid
+  </Card>
+  <Card title="Animations" icon="wand-magic-sparkles" href="/styling/animations">
+    Add motion to the grid
+  </Card>
+</CardGroup>

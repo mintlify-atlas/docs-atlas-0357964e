@@ -1,0 +1,402 @@
+---
+title: "CSS Animations"
+description: "Smooth animations and interactive effects throughout the portfolio"
+---
+
+## Overview
+
+The portfolio uses CSS animations to create engaging, smooth interactions without any JavaScript. Animations are applied to:
+
+- **Navigation links** - Hover underline effect
+- **Skills icons** - Fade-in on page load
+- **Icon hover states** - Scale and brightness effects
+- **Focus states** - Accessibility indicators
+
+<Info>
+All animations use CSS keyframes and transitions, ensuring smooth 60fps performance.
+</Info>
+
+## Navigation Hover Animation
+
+When hovering over navigation links, a blue underline animates in from left to right.
+
+### The Effect
+
+```css styles.css:96-104
+.nav-link:hover::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #003ba8;
+    display: block;
+    animation-name: ampliar-anchura;
+    animation-duration: 0.5s;
+}
+```
+
+### The Keyframes
+
+```css styles.css:106-114
+@keyframes ampliar-anchura {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+```
+
+<Tabs>
+  <Tab title="How It Works">
+    1. A `::after` pseudo-element is created on hover
+    2. It starts at `width: 0%`
+    3. Animates to `width: 100%` over 0.5 seconds
+    4. Creates a 3px tall blue bar
+    5. When hover ends, the element disappears (no reverse animation)
+  </Tab>
+  
+  <Tab title="Visual Demo">
+    ```
+    Initial state (no hover):
+    ┌──────────────┐
+    │  Quien Soy   │
+    └──────────────┘
+    
+    Hover state (animating):
+    ┌──────────────┐
+    │  Quien Soy   │
+    └████──────────┘  ← Growing underline
+    
+    Hover complete:
+    ┌──────────────┐
+    │  Quien Soy   │
+    └██████████████┘  ← Full width
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>
+The animation name "ampliar-anchura" means "expand width" in Spanish.
+</Tip>
+
+## Skills Icons Fade Animation
+
+The technology icons in the Habilidades section fade in and slide up when the page loads.
+
+### Icon Styling
+
+```css styles.css:192-203
+.img {
+    width: 50px;
+    height: 50px;
+    transition: 0.3s ease-out;
+    box-sizing: content-box;
+    animation: fadeSlide 0.8s both;
+    scale: 1;
+}
+```
+
+<Info>
+The `animation-fill-mode: both` (the "both" keyword) keeps the initial `opacity: 0` until animation starts and maintains the final state after completion.
+</Info>
+
+### FadeSlide Keyframes
+
+```css styles.css:213-223
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+```
+
+**Animation breakdown**:
+- **Initial state**: Icons are invisible (`opacity: 0`) and 20px below their final position
+- **Duration**: 0.8 seconds
+- **End state**: Icons are fully visible (`opacity: 1`) at their natural position
+- **Effect**: Icons smoothly fade in while sliding upward
+
+## Staggered Animation Delays
+
+Each icon animates with a different delay, creating a wave effect:
+
+```css styles.css:225-251
+.img:nth-child(1) { animation-delay: 0.2s; }  /* HTML */
+.img:nth-child(2) { animation-delay: 0.3s; }  /* CSS */
+.img:nth-child(3) { animation-delay: 0.4s; }  /* JavaScript */
+.img:nth-child(4) { animation-delay: 0.5s; }  /* Tailwind */
+.img:nth-child(5) { animation-delay: 0.4s; }  /* SQL Server */
+.img:nth-child(6) { animation-delay: 0.3s; }  /* MongoDB */
+.img:nth-child(7) { animation-delay: 0.2s; }  /* MySQL */
+```
+
+<Tabs>
+  <Tab title="Desktop Pattern">
+    The delays create a **center-out** wave pattern:
+    
+    ```
+    0.2s → 0.3s → 0.4s → 0.5s → 0.4s → 0.3s → 0.2s
+    HTML   CSS    JS     TW     SQL    Mongo  MySQL
+    
+      ░     ░░    ░░░    ████   ░░░    ░░     ░
+           ⬅ Earlier          Later ➡
+    ```
+    
+    The middle icon (Tailwind) animates last, creating symmetry.
+  </Tab>
+  
+  <Tab title="Mobile Pattern">
+    On mobile (≤800px), delays increase linearly:
+    
+    ```css styles.css:253-281
+    @media (max-width: 800px) {
+        .img:nth-child(1) { animation-delay: 0.2s; }
+        .img:nth-child(2) { animation-delay: 0.3s; }
+        .img:nth-child(3) { animation-delay: 0.4s; }
+        .img:nth-child(4) { animation-delay: 0.5s; }
+        .img:nth-child(5) { animation-delay: 0.6s; }
+        .img:nth-child(6) { animation-delay: 0.7s; }
+        .img:nth-child(7) { animation-delay: 0.8s; }
+    }
+    ```
+    
+    Creates a **left-to-right** cascade when icons wrap to multiple rows.
+  </Tab>
+</Tabs>
+
+<Warning>
+If you add or remove skill icons, update both the desktop (lines 225-251) and mobile (lines 254-280) animation delays.
+</Warning>
+
+## Icon Hover Effects
+
+When hovering over skill icons, they scale up and brighten:
+
+```css styles.css:205-211
+.img:hover {
+    scale: 1.15;
+    filter: brightness(1.5) contrast(1.1);
+}
+```
+
+**Effects breakdown**:
+- `scale: 1.15` - Icon grows to 115% size (57.5px × 57.5px)
+- `brightness(1.5)` - Colors become 50% brighter
+- `contrast(1.1)` - Slightly increased contrast makes colors pop
+
+<Tip>
+The `scale` property is a shorthand for `transform: scale(1.15)` and has better performance.
+</Tip>
+
+### Transition Timing
+
+```css styles.css:195
+transition: 0.3s ease-out;
+```
+
+The hover effect transitions over **0.3 seconds** with an `ease-out` timing function (fast start, slow end).
+
+<Tabs>
+  <Tab title="Normal State">
+    ```
+    ┌────────┐
+    │        │
+    │  [🔷]  │  50×50px, normal brightness
+    │        │
+    └────────┘
+    ```
+  </Tab>
+  
+  <Tab title="Hover State">
+    ```
+    ┌─────────┐
+    │         │
+    │  [💠]  │  57.5×57.5px, brighter, higher contrast
+    │         │
+    └─────────┘
+    ```
+  </Tab>
+</Tabs>
+
+## Focus States (Accessibility)
+
+Keyboard navigation triggers focus styles with a blue outline:
+
+```css styles.css:88-93
+.nav-link a:focus {
+    outline: 4px solid #003ba8;
+    border-radius: 8px;
+    outline-offset: 3px;
+    transition-delay: 125ms;
+}
+```
+
+**Features**:
+- **4px solid outline** in brand blue (`#003ba8`)
+- **8px border radius** for softer corners
+- **3px offset** creates space between text and outline
+- **125ms delay** prevents flashing when rapidly tabbing
+
+<Info>
+This ensures the portfolio is fully accessible via keyboard (Tab key navigation).
+</Info>
+
+## Profile Image Effect
+
+The profile photo has a glowing drop shadow:
+
+```css styles.css:141
+filter: drop-shadow(1px 1px 30px #0094a8);
+```
+
+**Parameters**:
+- `1px` horizontal offset
+- `1px` vertical offset  
+- `30px` blur radius (creates glow effect)
+- `#0094a8` light blue color
+
+<Tip>
+Unlike `box-shadow`, `drop-shadow` follows the alpha channel of PNG images, creating a true glow around the subject rather than a rectangular shadow.
+</Tip>
+
+## Performance Considerations
+
+### GPU-Accelerated Properties
+
+These animations use GPU-accelerated properties for smooth performance:
+
+✅ **Animating (fast)**:
+- `transform` (translateY, scale)
+- `opacity`
+- `filter`
+
+❌ **Avoid animating (slow)**:
+- `width`, `height`
+- `margin`, `padding`
+- `top`, `left`
+
+<Warning>
+The navigation underline animation uses `width`, which can cause minor performance issues on very low-end devices. Consider using `transform: scaleX()` instead:
+
+```css
+.nav-link::after {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease-out;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+```
+</Warning>
+
+### Animation Performance Tips
+
+<Accordion title="Reduce motion for accessibility">
+  Some users prefer reduced motion. Add this media query:
+  
+  ```css
+  @media (prefers-reduced-motion: reduce) {
+      * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+      }
+  }
+  ```
+</Accordion>
+
+<Accordion title="Will-change property">
+  For frequently animated elements, hint to the browser:
+  
+  ```css
+  .img {
+      will-change: transform, filter;
+  }
+  ```
+  
+  But don't overuse it - only for elements that animate often.
+</Accordion>
+
+## Customization Examples
+
+### Slower Fade Animation
+
+```css
+.img {
+    animation: fadeSlide 1.5s both;  /* Was 0.8s */
+}
+```
+
+### Different Hover Scale
+
+```css
+.img:hover {
+    scale: 1.3;  /* Bigger growth */
+}
+```
+
+### Reverse Navigation Animation
+
+Make the underline animate out when hover ends:
+
+```css
+.nav-link::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background-color: #003ba8;
+    display: block;
+    transition: width 0.3s ease-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+```
+
+### Add Bounce Effect
+
+```css
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    60% {
+        transform: translateY(-5px);  /* Slight bounce */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Responsive Design" icon="mobile-screen" href="/styling/responsive-design">
+    Learn how animations adapt to mobile
+  </Card>
+  <Card title="CSS Architecture" icon="palette" href="/styling/css-architecture">
+    Understand the overall CSS structure
+  </Card>
+  <Card title="Navigation" icon="bars" href="/structure/navigation">
+    Explore the navigation HTML and CSS
+  </Card>
+  <Card title="Customization" icon="pen-to-square" href="/customization/colors">
+    Customize animation colors and timing
+  </Card>
+</CardGroup>

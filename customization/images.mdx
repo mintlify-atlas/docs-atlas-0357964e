@@ -1,0 +1,344 @@
+---
+title: Image Customization
+description: Replace and customize images including profile photo and skill icons
+---
+
+This guide covers how to customize all images in your portfolio, including your profile photo and technology skill icons.
+
+## Profile Photo
+
+Your profile photo is displayed prominently in the hero section with a glowing drop shadow effect.
+
+<Steps>
+  <Step title="Locate the profile photo">
+    The profile photo is referenced on line 32 of `index.html`:
+
+    ```html
+    <img src="/img/mi-foto.png" alt="Foto de perfil de Luis Eduardo" class="mi-foto">
+    ```
+  </Step>
+
+  <Step title="Prepare your photo">
+    - **Format**: PNG or JPG recommended
+    - **Dimensions**: At least 700x700px for sharp display (displays at 350px)
+    - **Aspect ratio**: Square (1:1) works best
+    - **File size**: Optimize to under 500KB
+    - **Background**: Consider using a transparent background (PNG) for best results
+  </Step>
+
+  <Step title="Add your photo">
+    1. Save your photo as `mi-foto.png` in the `img/` directory
+    2. Or rename it and update the path in `index.html`:
+
+    ```html
+    <img src="/img/profile-photo.jpg" alt="Profile photo of [Your Name]" class="mi-foto">
+    ```
+  </Step>
+
+  <Step title="Update the alt text">
+    Change the alt text to describe your photo:
+
+    ```html
+    <img src="/img/mi-foto.png" alt="Profile photo of [Your Name]" class="mi-foto">
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  **Image Optimization**: Use tools like [TinyPNG](https://tinypng.com/), [Squoosh](https://squoosh.app/), or [ImageOptim](https://imageoptim.com/) to compress your images without losing quality.
+</Tip>
+
+### Profile Photo Styling
+
+The profile photo has special styling defined in `styles.css`:
+
+**Size** (line 136):
+```css
+.mi-foto {
+    width: 350px;
+}
+```
+
+**Drop Shadow Effect** (line 141):
+```css
+filter: drop-shadow(1px 1px 30px #0094a8);
+```
+
+This creates a cyan glow around your photo. You can customize the shadow:
+
+```css
+/* Larger glow */
+filter: drop-shadow(2px 2px 50px #0094a8);
+
+/* Different color glow */
+filter: drop-shadow(1px 1px 30px #ff6b6b);
+
+/* Multiple shadows */
+filter: drop-shadow(0 0 20px #0094a8) drop-shadow(0 0 40px #003ba8);
+
+/* No shadow */
+filter: none;
+```
+
+## Skill Icons
+
+The skills section displays technology icons in the `/svg/` directory.
+
+### Current Skill Icons
+
+The portfolio includes these icons (lines 39-46 in `index.html`):
+
+```html
+<img src="/svg/html-5-svgrepo-com.svg" alt="html imagen" class="img">
+<img src="/svg/css-3-svgrepo-com.svg" alt="css imagen" class="img">
+<img src="/svg/javascript-svgrepo-com.svg" alt="javascript imagen" class="img">
+<img src="/svg/tailwind-svgrepo-com.svg" alt="tailwind imagen" class="img">
+<img src="/svg/microsoft-sql-server-logo-svgrepo-com.svg" alt="sqlserver imagen" class="img">
+<img src="/svg/mongodb-svgrepo-com.svg" alt="mongodb imagen" class="img">
+<img src="/svg/mysql-logo-svgrepo-com.svg" alt="mysql imagen" class="img">
+```
+
+### Replacing Skill Icons
+
+<Steps>
+  <Step title="Find icon files">
+    Get SVG icons from these free resources:
+    - [SVG Repo](https://www.svgrepo.com/) - Free SVG icons
+    - [Devicon](https://devicon.dev/) - Programming language icons
+    - [Simple Icons](https://simpleicons.org/) - Brand SVG icons
+    - [Iconify](https://icon-sets.iconify.design/) - Unified icon framework
+  </Step>
+
+  <Step title="Download and save icons">
+    1. Download SVG files for your technologies
+    2. Save them in the `/svg/` directory
+    3. Use descriptive filenames (e.g., `react-logo.svg`, `nodejs-icon.svg`)
+  </Step>
+
+  <Step title="Update the HTML">
+    Replace the existing skill icons with your own:
+
+    ```html
+    <div class="group">
+        <img src="/svg/react-logo.svg" alt="React" class="img">
+        <img src="/svg/typescript-icon.svg" alt="TypeScript" class="img">
+        <img src="/svg/nodejs-icon.svg" alt="Node.js" class="img">
+        <img src="/svg/python-logo.svg" alt="Python" class="img">
+        <img src="/svg/docker-icon.svg" alt="Docker" class="img">
+        <img src="/svg/git-logo.svg" alt="Git" class="img">
+    </div>
+    ```
+  </Step>
+
+  <Step title="Update alt text">
+    Make sure each icon has descriptive alt text for accessibility:
+
+    ```html
+    <img src="/svg/react-logo.svg" alt="React" class="img">
+    ```
+
+    Not:
+    ```html
+    <img src="/svg/react-logo.svg" alt="react imagen" class="img">
+    ```
+  </Step>
+</Steps>
+
+### Icon Sizing and Display
+
+Skill icons are styled to be 50x50 pixels (defined in `styles.css:193-194`):
+
+```css
+.img {
+    width: 50px;
+    height: 50px;
+}
+```
+
+To change the icon size:
+
+```css
+/* Larger icons */
+.img {
+    width: 75px;
+    height: 75px;
+}
+
+/* Smaller icons */
+.img {
+    width: 40px;
+    height: 40px;
+}
+```
+
+### Icon Hover Effect
+
+Icons scale up and brighten on hover (`styles.css:205-210`):
+
+```css
+.img:hover {
+    scale: 1.15;
+    filter: brightness(1.5) contrast(1.1);
+}
+```
+
+Customize the hover effect:
+
+```css
+/* Subtle hover */
+.img:hover {
+    scale: 1.05;
+    filter: brightness(1.2);
+}
+
+/* Dramatic hover */
+.img:hover {
+    scale: 1.3;
+    filter: brightness(1.8) saturate(1.3);
+}
+
+/* Rotate on hover */
+.img:hover {
+    scale: 1.15;
+    transform: rotate(5deg);
+    filter: brightness(1.5);
+}
+```
+
+<Warning>
+  Ensure all skill icons are the same format (all SVG or all PNG) for consistent display. SVG is recommended for crisp rendering at any size.
+</Warning>
+
+## Adding More Skills
+
+To add additional skill icons beyond the current seven:
+
+<Steps>
+  <Step title="Add the new icon image tag">
+    Insert a new `<img>` tag in the skills group:
+
+    ```html
+    <div class="group">
+        <!-- existing icons -->
+        <img src="/svg/new-skill.svg" alt="New Technology" class="img">
+    </div>
+    ```
+  </Step>
+
+  <Step title="Add animation delay (optional)">
+    Each icon has a staggered fade-in animation. To add animation for an 8th icon, add this to `styles.css`:
+
+    ```css
+    .img:nth-child(8) {
+        animation-delay: 0.1s;
+    }
+    ```
+
+    Add this after line 251 and in the mobile media query after line 280.
+  </Step>
+</Steps>
+
+## Logo in Header
+
+The header logo is currently a placeholder image (line 15 in `index.html`):
+
+```html
+<h1><img src="https://placehold.co/140x40/f0f0f0/333?text=Luis+Llatas" alt="Luis Llatas"></h1>
+```
+
+### Replacing with Your Logo
+
+<Steps>
+  <Step title="Create your logo">
+    - **Dimensions**: 140x40px (or maintain this aspect ratio)
+    - **Format**: PNG with transparent background or SVG
+    - **Colors**: Use colors that contrast with the dark header background (#0f1011)
+  </Step>
+
+  <Step title="Save and reference your logo">
+    ```html
+    <h1><img src="/img/logo.png" alt="Your Name Logo"></h1>
+    ```
+
+    Or use an SVG for perfect scaling:
+    ```html
+    <h1><img src="/img/logo.svg" alt="Your Name Logo"></h1>
+    ```
+  </Step>
+</Steps>
+
+## Image File Organization
+
+Keep your images organized:
+
+```
+/img/
+  ├── mi-foto.png          (profile photo)
+  └── logo.png             (header logo)
+
+/svg/
+  ├── html-5-svgrepo-com.svg
+  ├── css-3-svgrepo-com.svg
+  ├── javascript-svgrepo-com.svg
+  └── ... (other skill icons)
+```
+
+## Performance Best Practices
+
+<Tip>
+  **Optimize all images before uploading:**
+  
+  1. **Compress**: Use TinyPNG, Squoosh, or ImageOptim
+  2. **Resize**: Don't upload images larger than needed
+  3. **Format**: Use WebP for photos (with fallback), SVG for icons
+  4. **Lazy loading**: Add `loading="lazy"` to images below the fold
+  
+  Example:
+  ```html
+  <img src="/img/project-screenshot.jpg" alt="Project preview" loading="lazy">
+  ```
+</Tip>
+
+### Responsive Images
+
+The profile photo is responsive (lines 151-155 in `styles.css`):
+
+```css
+@media (max-width: 780px) {
+    .mi-foto {
+        width: 60%;
+    }
+}
+```
+
+On mobile devices, the photo scales to 60% of the container width instead of a fixed 350px.
+
+## Adding Favicons
+
+Add a favicon to appear in browser tabs:
+
+```html
+<!-- Add to <head> section in index.html -->
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+```
+
+Generate favicons at [Favicon.io](https://favicon.io/) or [RealFaviconGenerator](https://realfavicongenerator.net/).
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customize Content" icon="pen-to-square" href="/customization/content">
+    Update text and add your information
+  </Card>
+  <Card title="Customize Colors" icon="droplet" href="/customization/colors">
+    Change the color scheme to match your images
+  </Card>
+  <Card title="Content Sections" icon="layer-group" href="/structure/sections">
+    Learn where images are used in each section
+  </Card>
+  <Card title="Responsive Design" icon="mobile-screen" href="/styling/responsive-design">
+    See how images adapt to different screen sizes
+  </Card>
+</CardGroup>

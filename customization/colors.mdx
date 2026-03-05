@@ -1,0 +1,187 @@
+---
+title: Color Customization
+description: Learn how to customize the color scheme of your portfolio
+---
+
+The portfolio uses a dark theme with blue accent colors. All colors are defined in `css/styles.css` and can be easily customized to match your brand.
+
+## Color Palette Overview
+
+The current color scheme includes:
+
+- **Background Gradient**: Black to blue gradient (`#000000` → `#0069a8` → `#101828`)
+- **Primary Accent**: `#003ba8` (dark blue)
+- **Secondary Accent**: `#0094a8` (cyan blue)
+- **Header Background**: `#0f1011` (near black)
+- **Text Color**: `white`
+
+## Changing Colors
+
+<Steps>
+  <Step title="Open the CSS file">
+    Navigate to `css/styles.css` in your source directory.
+  </Step>
+
+  <Step title="Update the background gradient">
+    Find line 17 in `styles.css`:
+
+    ```css
+    background: linear-gradient(#000000, #0069a8, #101828);
+    ```
+
+    Replace the hex color values with your preferred colors:
+
+    ```css
+    /* Example: Purple to pink gradient */
+    background: linear-gradient(#1a0033, #6b2d5c, #2d1b3d);
+    ```
+
+    The gradient flows from top to bottom across the page.
+  </Step>
+
+  <Step title="Update the accent colors">
+    The accent color `#003ba8` appears in multiple places:
+
+    **Navigation focus outline** (`styles.css:89`):
+    ```css
+    outline: 4px solid #003ba8;
+    ```
+
+    **Navigation hover effect** (`styles.css:100`):
+    ```css
+    background-color: #003ba8;
+    ```
+
+    Replace all instances with your preferred accent color using Find & Replace.
+  </Step>
+
+  <Step title="Update the secondary accent">
+    The cyan accent `#0094a8` is used for the profile photo drop shadow at line 141:
+
+    ```css
+    filter: drop-shadow(1px 1px 30px #0094a8);
+    ```
+
+    Change this to match your accent color or use a complementary shade.
+  </Step>
+
+  <Step title="Update the header background">
+    Find line 62 in `styles.css`:
+
+    ```css
+    background-color: #0f1011;
+    ```
+
+    Change this to your preferred header background color. Consider using:
+    - A solid color from your gradient
+    - A semi-transparent color: `rgba(15, 16, 17, 0.9)`
+    - Complete transparency: `transparent`
+  </Step>
+
+  <Step title="Test your changes">
+    Open `index.html` in a browser to preview your new color scheme. Make adjustments as needed.
+  </Step>
+</Steps>
+
+<Tip>
+  Use a color picker tool to find perfect hex codes:
+  - [Coolors.co](https://coolors.co/) - Generate color palettes
+  - [Adobe Color](https://color.adobe.com/) - Create harmonious schemes
+  - [HTML Color Picker](https://www.w3schools.com/colors/colors_picker.asp) - Simple hex picker
+</Tip>
+
+## Color Reference Table
+
+| Location | Line | Current Color | Usage |
+|----------|------|---------------|-------|
+| Body gradient start | 17 | `#000000` | Page background (top) |
+| Body gradient middle | 17 | `#0069a8` | Page background (middle) |
+| Body gradient end | 17 | `#101828` | Page background (bottom) |
+| Header background | 62 | `#0f1011` | Navigation bar |
+| Primary accent | 89, 100 | `#003ba8` | Links, focus, hover |
+| Secondary accent | 141 | `#0094a8` | Photo shadow |
+| Text color | 18 | `white` | All text |
+
+## Creating a Cohesive Color Scheme
+
+<Warning>
+  Ensure sufficient contrast between background and text colors for readability. Use a [contrast checker](https://webaim.org/resources/contrastchecker/) to verify WCAG compliance.
+</Warning>
+
+### Recommended Combinations
+
+**Professional Blue** (current):
+```css
+/* Dark blue professional theme */
+background: linear-gradient(#000000, #0069a8, #101828);
+accent: #003ba8;
+secondary: #0094a8;
+```
+
+**Warm Sunset**:
+```css
+/* Orange to purple gradient */
+background: linear-gradient(#0f0f0f, #c2410c, #1a1425);
+accent: #ea580c;
+secondary: #fb923c;
+```
+
+**Forest Green**:
+```css
+/* Nature-inspired green theme */
+background: linear-gradient(#0a0f0a, #166534, #0f1410);
+accent: #16a34a;
+secondary: #4ade80;
+```
+
+**Modern Purple**:
+```css
+/* Vibrant purple theme */
+background: linear-gradient(#0c0a14, #7c3aed, #14111f);
+accent: #9333ea;
+secondary: #a855f7;
+```
+
+## Using CSS Variables (Advanced)
+
+For easier color management, consider converting the colors to CSS variables:
+
+```css
+:root {
+  --color-bg-start: #000000;
+  --color-bg-middle: #0069a8;
+  --color-bg-end: #101828;
+  --color-accent-primary: #003ba8;
+  --color-accent-secondary: #0094a8;
+  --color-header: #0f1011;
+  --color-text: white;
+}
+
+.body {
+  background: linear-gradient(
+    var(--color-bg-start),
+    var(--color-bg-middle),
+    var(--color-bg-end)
+  );
+  color: var(--color-text);
+}
+```
+
+This allows you to change all colors from a single location at the top of your CSS file.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customize Content" icon="pen-to-square" href="/customization/content">
+    Update text and add your information
+  </Card>
+  <Card title="Customize Images" icon="image" href="/customization/images">
+    Replace photos and skill icons
+  </Card>
+  <Card title="CSS Architecture" icon="palette" href="/styling/css-architecture">
+    Learn about the CSS structure and organization
+  </Card>
+  <Card title="Responsive Design" icon="mobile-screen" href="/styling/responsive-design">
+    See how colors adapt across devices
+  </Card>
+</CardGroup>

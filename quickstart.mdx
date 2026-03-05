@@ -1,80 +1,195 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: Quick Start
+description: Get the Luis Llatas Portfolio running locally in just a few minutes
 ---
 
-## Get started in three steps
+## Get Up and Running
 
-Get your documentation site running locally and make your first customization.
+This guide will help you set up and view the portfolio on your local machine. No build tools or package managers required - just open and view!
 
-### Step 1: Set up your local environment
+<Steps>
+  <Step title="Clone or Download the Repository">
+    First, get a local copy of the portfolio files:
+
+    ```bash
+    # Clone the repository
+    git clone <repository-url>
+    cd luis-llatas-portfolio
+    ```
+
+    Or download the ZIP file and extract it to your preferred location.
+
+    <Note>
+      Make sure you have all files including the `/css`, `/img`, and `/svg` directories for proper rendering.
+    </Note>
+  </Step>
+
+  <Step title="Open in Your Browser">
+    The simplest way is to open `index.html` directly:
+
+    **Option A: Direct File Opening**
+    - Navigate to the project folder
+    - Double-click `index.html`
+    - It will open in your default browser
+
+    **Option B: Local Development Server (Recommended)**
+    
+    Using a local server prevents CORS issues and mimics production better:
+
+    <CodeGroup>
+    ```bash Python
+    # Python 3
+    python -m http.server 8000
+    # Then visit http://localhost:8000
+    ```
+
+    ```bash Node.js
+    # Using npx (no installation needed)
+    npx serve .
+    # Then visit http://localhost:3000
+    ```
+
+    ```bash PHP
+    # PHP built-in server
+    php -S localhost:8000
+    # Then visit http://localhost:8000
+    ```
+    </CodeGroup>
+
+    <Note>
+      If images don't load, a local server is required because some browsers restrict file:// protocol access to local resources.
+    </Note>
+  </Step>
+
+  <Step title="Explore the Portfolio Sections">
+    Once loaded, you'll see the complete portfolio with these sections:
+
+    **Navigation Bar** - Fixed at the top with links to:
+    - Quien Soy (Who I Am)
+    - Habilidades (Skills)
+    - Proyectos (Projects)
+    - Contáctame (Contact Me)
+
+    ```html
+    <nav class="nav">
+        <h1><img src="https://placehold.co/140x40/f0f0f0/333?text=Luis+Llatas" alt="Luis Llatas"></h1>
+        <ul class="menu">
+            <li class="nav-link"><a href="#main">Quien Soy</a></li>
+            <li class="nav-link"><a href="#Habilidades">Habilidades</a></li>
+            <li class="nav-link"><a href="#proyectos">Proyectos</a></li>
+            <li class="nav-link"><a href="#contacto">Contáctame</a></li>
+        </ul>
+    </nav>
+    ```
+
+    **Hero Section** - Profile introduction:
+    ```html
+    <section class="section">
+        <h2>Desarrollador Full Stack</h2>
+        <p>Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.</p>
+    </section>
+    ```
+
+    **Skills Display** - Animated technology icons that fade in with staggered timing
+
+    Try hovering over the skill icons to see the scale and brightness effects!
+  </Step>
+
+  <Step title="Test Responsive Design">
+    The portfolio is fully responsive. Test it by:
+
+    1. **Desktop View** - Default 2-column grid layout for the hero section
+    2. **Mobile View** - Resize your browser to under 780px width
+
+    The layout automatically switches to a single column at the 780px breakpoint:
+
+    ```css
+    @media (max-width: 780px) {
+        #main {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+    }
+    ```
+
+    <Note>
+      Open your browser's DevTools (F12) and use the device toolbar to test different screen sizes.
+    </Note>
+  </Step>
+
+  <Step title="Verify All Features Work">
+    Test these interactive elements:
+
+    **Navigation Hover Effects**
+    - Hover over navigation links to see the animated underline
+    - The animation expands from 0% to 100% width over 0.5 seconds
+
+    **Keyboard Navigation**
+    - Press `Tab` to navigate through links
+    - Notice the blue focus outline on focused elements
+
+    **Skill Icons**
+    - Icons should fade in with staggered delays (0.2s to 0.8s)
+    - Hover to see scale increase to 1.15x with brightness boost
+
+    <Note>
+      If animations seem too fast or slow, you can adjust timing in `css/styles.css` - look for `animation-duration` and `animation-delay` properties.
+    </Note>
+  </Step>
+</Steps>
+
+## What You'll See
+
+When properly loaded, you'll experience:
+
+- **Gradient Background**: A smooth dark gradient from black (`#000000`) through blue (`#0069a8`) to dark blue-gray (`#101828`)
+- **Fixed Header**: Navigation stays at the top as you scroll (z-index: 99)
+- **Profile Section**: 3:2 grid ratio between text content and profile image
+- **Animated Skills**: 7 technology icons with fade-in and hover effects
+
+## Troubleshooting
 
 <AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
+  <Accordion title="Images aren't loading">
+    - Verify the `/img` and `/svg` folders exist in your project root
+    - Check that file paths match exactly (case-sensitive on some systems)
+    - Use a local server instead of opening `index.html` directly
+    - Check browser console (F12) for 404 errors
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
+
+  <Accordion title="Styles look broken">
+    - Confirm `css/styles.css` exists and is in the correct location
+    - Check the link tag in `index.html` line 8: `<link rel="stylesheet" href="css/styles.css">`
+    - Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
+  </Accordion>
+
+  <Accordion title="Navigation doesn't scroll smoothly">
+    - This is default HTML anchor behavior - working as expected
+    - For smooth scrolling, you could add CSS: `html { scroll-behavior: smooth; }`
+    - However, the current version uses instant jump navigation
   </Accordion>
 </AccordionGroup>
 
-### Step 2: Deploy your changes
+## Next Steps
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
+Now that your portfolio is running, you're ready to customize it:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Customize Content" icon="pen-to-square" href="/customization/content">
+    Replace placeholder text and add your own information
+  </Card>
+  <Card title="Customize Colors" icon="palette" href="/customization/colors">
+    Change the gradient and accent colors to match your brand
+  </Card>
+  <Card title="Customize Images" icon="folder-open" href="/customization/images">
+    Replace profile photo and skill icons
+  </Card>
+  <Card title="Learn CSS Grid" icon="table-cells" href="/styling/grid-layout">
+    Understand the layout system powering the portfolio
+  </Card>
 </CardGroup>
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  Since this is a static HTML/CSS site, any changes you make will be visible immediately after refreshing your browser!
 </Note>
